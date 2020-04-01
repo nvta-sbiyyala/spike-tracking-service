@@ -1,0 +1,6 @@
+spring:
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+  datasource:
+    url: jdbc:h2:mem:morgoth;db_close_delay=-1
