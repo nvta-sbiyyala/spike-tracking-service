@@ -7,12 +7,10 @@ import java.util.UUID
 
 @Repository
 class ParcelRepo {
-    fun create(id: UUID, contents: String): UUID {
-        return transaction {
-            ParcelTable.insert {
-                it[ParcelTable.id] = id
-                it[ParcelTable.contents] = contents
-            } get ParcelTable.id
-        }
-    }
+    fun create(parcelRecord: ParcelRecord): UUID =
+        ParcelTable.insert {
+            it[ParcelTable.id] = parcelRecord.id
+            it[ParcelTable.contents] = parcelRecord.contents
+        } get ParcelTable.id
+
 }
