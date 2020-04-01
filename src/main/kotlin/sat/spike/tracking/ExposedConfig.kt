@@ -15,7 +15,7 @@ import javax.sql.DataSource
 
 @Configuration
 @EnableTransactionManagement
-class ExposedConfig {
+class ExposedConfig { // TODO: Do you have to *live* with this?? - validate
 
     @Bean
     fun transactionManager(dataSource: DataSource) =
