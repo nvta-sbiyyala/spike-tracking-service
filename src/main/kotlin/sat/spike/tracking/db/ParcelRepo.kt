@@ -1,7 +1,6 @@
 package sat.spike.tracking.db
 
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Repository
 import java.util.UUID
 
@@ -12,5 +11,4 @@ class ParcelRepo {
             it[ParcelTable.id] = parcelRecord.id
             it[ParcelTable.contents] = parcelRecord.contents
         } get ParcelTable.id
-
 }

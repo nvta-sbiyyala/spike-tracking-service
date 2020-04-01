@@ -3,9 +3,9 @@ spring:
     enabled: true
     baseline-on-migrate: true
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
-    username: ${DATABASE_USERNAME:}
-    password: ${DATABASE_PASSWORD:}
+    url: ${DATABASE_URL:jdbc:postgresql://postgres:5432/tracking}
+    username: ${DATABASE_USERNAME:admin}
+    password: ${DATABASE_PASSWORD:password}
     hikari:
       connectionTimeout: ${DATABASE_CONNECTION_TIMEOUT_MS:30000}
       idleTimeout: ${DATABASE_IDLE_TIMEOUT_MS:600000}

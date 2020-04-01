@@ -72,6 +72,6 @@ tasks.withType<KotlinCompile> {
 }
 
 flyway {
-    url = "jdbc:postgresql://127.0.0.1:5432/postgres"
+    url = "jdbc:postgresql://127.0.0.1:5432/tracking"
     baselineOnMigrate = true
 }
