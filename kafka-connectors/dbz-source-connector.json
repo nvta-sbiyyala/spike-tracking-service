@@ -1,0 +1,17 @@
+{
+  "name": "parcel-outbox-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "admin",
+    "database.password": "password",
+    "database.dbname": "tracking",
+    "database.server.name": "pg-outbox-server",
+    "tombstones.on.delete": "false",
+    "table.whitelist": "public.outbox",
+    "transforms": "outbox",
+    "transforms.outbox.type": "com.nvta.outbox.OutboxTransformer"
+  }
+}

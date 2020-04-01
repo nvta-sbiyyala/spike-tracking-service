@@ -1,0 +1,19 @@
+{
+  "name": "elasticsearch-sink",
+  "config": {
+    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+    "tasks.max": "1",
+    "topics": "parcel_created",
+    "connection.url": "http://elasticsearch:9200",
+    "type.name": "tracking",
+    "_comment": "--- Change Key converter (default is Avro) ---",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "schema.ignore": "true",
+    "transforms": "ExtractField",
+    "transforms.ExtractField.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.ExtractField.field": "payload",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
