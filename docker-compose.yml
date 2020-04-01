@@ -60,7 +60,7 @@ services:
   # Install debezium-connect.
   debezium-connect:
     container_name: custom-debezium-connect
-    image: dbz-custom-connect:1.0
+    image: docker.io/invtsbiyyala/dbz-custom-connect:1.0
     hostname: debezium-connect
     ports:
       - '8083:8083'
@@ -76,7 +76,7 @@ services:
       - elasticsearch
 
   spike-tracking-service:
-    image: spike-tracking-service:1.3
+    image: docker.io/invtsbiyyala/spike-tracking-service:1.0
     ports:
       - '8080:8080'
     depends_on:
