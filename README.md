@@ -45,3 +45,6 @@ docker exec -t kafka /usr/bin/kafka-console-consumer \
       --from-beginning \
       --topic parcel_created
  ```
+
+### Known issues
+Transaction management between `spring boot` `annotations` and `exposed` does not work. Active WIP..
