@@ -2,7 +2,6 @@ package sat.spike.tracking.services
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import sat.spike.tracking.controllers.NewParcelRequest
@@ -14,10 +13,10 @@ import java.util.UUID
 @Service
 class ParcelService(
     private val parcelRepo: ParcelRepo,
-    private val eventPublisher: ApplicationEventPublisher,
+    private val eventService: EventService,
     private val objectMapper: ObjectMapper
 ) {
-    // TODO: Validate/test all edge-cases of transaction-ability
+
     @Transactional
     fun createParcel(request: NewParcelRequest): UUID {
         val parcelRecord = toParcelRecord(UUID.randomUUID(), request.contents)
@@ -25,7 +24,7 @@ class ParcelService(
             .let { parcelRepo.create(parcelRecord) }
 
         val outboxEvent = createOutboxEvent(parcelRecord, objectMapper)
-        eventPublisher.publishEvent(outboxEvent)
+        eventService.handleOutboxEvent(outboxEvent)
 
         return uuid
     }
