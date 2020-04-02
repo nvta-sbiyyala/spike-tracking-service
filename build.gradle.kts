@@ -44,6 +44,7 @@ dependencies {
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.10.3")
 
     // DB Stuff
     implementation("com.h2database:h2:1.4.200")

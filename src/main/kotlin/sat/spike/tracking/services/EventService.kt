@@ -1,8 +1,8 @@
 package sat.spike.tracking.services
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Service
+import org.springframework.transaction.event.TransactionalEventListener
 import sat.spike.tracking.db.OutboxRecord
 import sat.spike.tracking.db.OutboxRepo
 import sat.spike.tracking.events.OutboxEvent
@@ -14,7 +14,7 @@ class EventService(
     private val objectMapper: ObjectMapper
 ) {
 
-    @EventListener
+    @TransactionalEventListener
     fun handleOutboxEvent(outboxEvent: OutboxEvent) {
         val uuid = UUID.randomUUID()
         val outboxRecord = OutboxRecord(
