@@ -46,5 +46,13 @@ docker exec -t kafka /usr/bin/kafka-console-consumer \
       --topic parcel_created
  ```
 
+## Elasticsearch
+To confirm that "sink"ing happened correctly
+
+```
+http://localhost:9200/_cat/indices?v
+http://localhost:9200/_search?index=parcel_created
+```
+
 ### Known issues
 Transaction management between `spring boot` `annotations` and `exposed` does not work. Active WIP..
