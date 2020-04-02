@@ -76,7 +76,7 @@ services:
       - elasticsearch
 
   spike-tracking-service:
-    image: docker.io/invtsbiyyala/spike-tracking-service:1.0
+    image: docker.io/invtsbiyyala/spike-tracking-service:1.1
     ports:
       - '8080:8080'
     depends_on:
