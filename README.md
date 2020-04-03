@@ -53,3 +53,9 @@ To confirm that "sink"ing happened correctly
 http://localhost:9200/_cat/indices?v
 http://localhost:9200/_search?index=parcel_created
 ```
+
+## Spike Auditing service
+Tiny Flask app, talk to `Elasticsearch`
+
+### WIP
+Dockerizing..
