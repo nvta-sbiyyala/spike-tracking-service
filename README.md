@@ -9,9 +9,6 @@
 1. `Debezium` "source" connector, hooked to the `Outbox`
 2. `Elasticsearch` "sink" connector, indexing generated `events`
       
-### Sample requests
-1. `curl -X POST http://localhost:8080/api/parcel -H  "Content-Type:application/json"  -d '{"contents":"Kotlin is cool"}'`
-
 ### Useful commands
 1. For problems with "flyway_schema_history": 
 ` ./gradlew flywayRepair`
@@ -46,16 +43,18 @@ docker exec -t kafka /usr/bin/kafka-console-consumer \
       --topic parcel_created
  ```
 
+### Sample requests
+1. `curl -X POST http://localhost:8080/api/parcel -H  "Content-Type:application/json"  -d '{"contents":"Kotlin is cool"}'`
+
 ## Elasticsearch
 To confirm that "sink"ing happened correctly
-
 ```
 http://localhost:9200/_cat/indices?v
 http://localhost:9200/_search?index=parcel_created
 ```
 
 ## Spike Auditing service
-Tiny Flask app, talk to `Elasticsearch`
-
-### WIP
-Dockerizing..
+Tiny Flask app / `api`, to query `Elasticsearch`
+```
+http://localhost:5000/parcels
+```

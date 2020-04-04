@@ -83,3 +83,12 @@ services:
       - postgres
       - kafka
       - debezium-connect
+
+  auditing-service:
+    image: docker.io/invtsbiyyala/spike-auditing-service:1.0
+    ports:
+      - '5000:5000'
+    environment:
+      ES_HOST: elasticsearch:9200
+    depends_on:
+      - elasticsearch
