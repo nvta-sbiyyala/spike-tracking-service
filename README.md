@@ -53,7 +53,7 @@ http://localhost:9200/_cat/indices?v
 http://localhost:9200/_search?index=parcel_created
 ```
 
-## Spike Auditing service
+## Auditing service
 Tiny Flask app / `api`, to query `Elasticsearch`
 ```
 http://localhost:5000/parcels
