@@ -32,7 +32,7 @@ class ParcelService(
 
 fun createOutboxEvent(record: ParcelRecord, mapper: ObjectMapper): OutboxEvent {
     val payload = mapper.convertValue(record, JsonNode::class.java)
-    val eventType = "PARCEL_CREATED" // Magic string! <refactor>
+    val eventType = "PARCEL.CREATED" // Magic string! <refactor>
     return OutboxEvent(eventType, payload)
 }
 

@@ -14,11 +14,11 @@
 ` ./gradlew flywayRepair`
 
 ## Kafka
-Create `parcel_created` topic:
+Create `parcel.created` topic:
 ```
 docker exec -t kafka /usr/bin/kafka-topics \
       --create --bootstrap-server :9092 \
-      --topic parcel_created \
+      --topic parcel.created \
       --partitions 1 \
       --replication-factor 1
 ```
