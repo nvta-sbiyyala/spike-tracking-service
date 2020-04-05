@@ -15,7 +15,7 @@ def hello_world():
 
 @app.route('/parcels')
 def get_parcels():
-    results = es_service.search(index="parcel.created", doc_type='tracking', body={"query": {"match_all": {}}})
+    results = es_service.search(index="parcel.outbox", doc_type='tracking', body={"query": {"match_all": {}}})
     count = results['hits']['total']['value']
     parcels = list(map(lambda x: json.loads(x['_source']['payload']), results['hits']['hits']))
     return jsonify(

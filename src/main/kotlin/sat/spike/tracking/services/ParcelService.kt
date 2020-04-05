@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import sat.spike.tracking.controllers.NewParcelRequest
+import sat.spike.tracking.controllers.ParcelRequest
 import sat.spike.tracking.db.ParcelRecord
 import sat.spike.tracking.db.ParcelRepo
 import sat.spike.tracking.events.OutboxEvent
@@ -18,21 +18,30 @@ class ParcelService(
 ) {
 
     @Transactional
-    fun createParcel(request: NewParcelRequest): UUID {
+    fun createParcel(request: ParcelRequest): UUID {
         val parcelRecord = toParcelRecord(UUID.randomUUID(), request.contents)
         val uuid = request
             .let { parcelRepo.create(parcelRecord) }
+        saveToOutbox(parcelRecord)
+        return uuid
+    }
 
+    @Transactional
+    fun updateParcel(parcelId: UUID, request: ParcelRequest) {
+        val parcelRecord = toParcelRecord(parcelId, request.contents)
+        request.let { parcelRepo.update(parcelRecord) }
+        saveToOutbox(parcelRecord)
+    }
+
+    private fun saveToOutbox(parcelRecord: ParcelRecord) {
         val outboxEvent = createOutboxEvent(parcelRecord, objectMapper)
         eventService.handleOutboxEvent(outboxEvent)
-
-        return uuid
     }
 }
 
 fun createOutboxEvent(record: ParcelRecord, mapper: ObjectMapper): OutboxEvent {
     val payload = mapper.convertValue(record, JsonNode::class.java)
-    val eventType = "PARCEL.CREATED" // Magic string! <refactor>
+    val eventType = "PARCEL.OUTBOX" // Magic string! <refactor>
     return OutboxEvent(eventType, payload)
 }
 

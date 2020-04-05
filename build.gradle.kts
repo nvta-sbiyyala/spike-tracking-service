@@ -59,6 +59,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jodatime:0.22.1")
     implementation("org.jetbrains.exposed:spring-transaction:0.22.1")
 
+    implementation(kotlin("script-runtime"))
+
 }
 
 tasks.withType<Test> {

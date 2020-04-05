@@ -14,11 +14,11 @@
 ` ./gradlew flywayRepair`
 
 ## Kafka
-Create `parcel.created` topic:
+Create `parcel.outbox` topic:
 ```
 docker exec -t kafka /usr/bin/kafka-topics \
       --create --bootstrap-server :9092 \
-      --topic parcel.created \
+      --topic parcel.outbox \
       --partitions 1 \
       --replication-factor 1
 ```
@@ -40,7 +40,7 @@ docker exec -t kafka /usr/bin/kafka-console-consumer \
       --bootstrap-server :9092 \
       --property print.key=true \
       --from-beginning \
-      --topic parcel_created
+      --topic parcel.outbox
  ```
 
 ### Sample requests
@@ -50,7 +50,7 @@ docker exec -t kafka /usr/bin/kafka-console-consumer \
 To confirm that "sink"ing happened correctly
 ```
 http://localhost:9200/_cat/indices?v
-http://localhost:9200/_search?index=parcel_created
+http://localhost:9200/_search?index=parcel.outbox
 ```
 
 ## Auditing service
