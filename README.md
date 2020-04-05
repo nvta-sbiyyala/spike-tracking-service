@@ -58,3 +58,7 @@ Tiny Flask app / `api`, to query `Elasticsearch`
 ```
 http://localhost:5000/parcels
 ```
+
+## TODO
+Follow [![best practices](https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/)](https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/) for Elasticsearch `connector`, 
+to facilitate idiomatic/aggregated queries in auditing service
