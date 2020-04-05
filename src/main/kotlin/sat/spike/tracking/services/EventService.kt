@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import sat.spike.tracking.db.OutboxRecord
 import sat.spike.tracking.db.OutboxRepo
 import sat.spike.tracking.events.OutboxEvent
+import sat.spike.tracking.utils.toString
 import java.util.UUID
 
 @Service
@@ -18,7 +19,7 @@ class EventService(
         val outboxRecord = OutboxRecord(
             uuid,
             outboxEvent.eventType,
-            objectMapper.writeValueAsString(outboxEvent.payload))
+            outboxEvent.payload.toString(objectMapper))
 
         outboxRepo.save(outboxRecord = outboxRecord)
 
