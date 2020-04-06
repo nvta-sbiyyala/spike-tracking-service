@@ -3,8 +3,9 @@
 ![Design](docs/design.png)
 
 ## Tracking service
-1. Has a single endpoint to "create" a record
-2. Has an `outbox` table which houses events to be consumed by `Debezium` 
+1. Has endpoints to `"create"` & `"update"` records
+2. Has an `outbox` table which houses events consumed by `Debezium` 
+3. All `outbox` events are broadcasted  to `parcel.outbox` topic 
 ### Connectors
 1. `Debezium` "source" connector, hooked to the `Outbox`
 2. `Elasticsearch` "sink" connector, indexing generated `events`
