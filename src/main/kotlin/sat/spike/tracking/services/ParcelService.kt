@@ -6,13 +6,16 @@ import java.util.UUID
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import sat.spike.tracking.controllers.ParcelRequest
+import sat.spike.tracking.db.OutboxRepo
 import sat.spike.tracking.db.ParcelRecord
+import sat.spike.tracking.db.ParcelRecordDto
 import sat.spike.tracking.db.ParcelRepo
 import sat.spike.tracking.events.OutboxEvent
 
 @Service
 class ParcelService(
     private val parcelRepo: ParcelRepo,
+    private val outboxRepo: OutboxRepo,
     private val eventService: EventService,
     private val objectMapper: ObjectMapper
 ) {
@@ -32,6 +35,12 @@ class ParcelService(
         request.let { parcelRepo.update(parcelRecord) }
         saveToOutbox(parcelRecord)
     }
+
+    @Transactional(readOnly = true)
+    fun getParcel(parcelId: UUID): ParcelRecordDto = parcelRepo.fetchParcel(parcelId)
+
+    @Transactional(readOnly = true)
+    fun getParcelHistory(parcelId: UUID): List<ParcelRecord> = outboxRepo.fetchParcelHistory(parcelId)
 
     private fun saveToOutbox(parcelRecord: ParcelRecord) {
         val outboxEvent = createOutboxEvent(parcelRecord, objectMapper)

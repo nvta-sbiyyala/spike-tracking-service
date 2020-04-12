@@ -10,3 +10,5 @@ object ParcelTable : Table("parcel") {
 }
 
 data class ParcelRecord(val id: UUID, val contents: String, val tags: List<String>)
+// TODO: Do a better job at deduping data classes
+data class ParcelRecordDto(val id: UUID, val contents: String)

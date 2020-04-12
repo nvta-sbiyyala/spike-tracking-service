@@ -2,6 +2,7 @@ package sat.spike.tracking.controllers
 
 import java.util.UUID
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -21,4 +22,14 @@ class ParcelController(private val parcelService: ParcelService) {
         consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun updateParcel(@RequestBody request: ParcelRequest, @PathVariable parcelId: UUID) =
         parcelService.updateParcel(parcelId, request)
+
+    @GetMapping("/api/parcel/{parcelId}",
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getParcel(@PathVariable parcelId: UUID) =
+        parcelService.getParcel(parcelId)
+
+    @GetMapping("/api/parcel/{parcelId}/history",
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getParcelHistory(@PathVariable parcelId: UUID) =
+        parcelService.getParcelHistory(parcelId)
 }
