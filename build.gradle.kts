@@ -54,10 +54,10 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     // exposed
-    implementation("org.jetbrains.exposed:exposed-core:0.22.1")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.22.1")
-    implementation("org.jetbrains.exposed:exposed-jodatime:0.22.1")
-    implementation("org.jetbrains.exposed:spring-transaction:0.22.1")
+    implementation("org.jetbrains.exposed:exposed-core:0.23.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.23.1")
+    implementation("org.jetbrains.exposed:exposed-jodatime:0.23.1")
+    implementation("org.jetbrains.exposed:spring-transaction:0.23.1")
 
     implementation(kotlin("script-runtime"))
 }
