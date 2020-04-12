@@ -38,7 +38,7 @@ class JsonColumnType<out T : Any>(
             value as PGobject
             try {
                 val json = value.value
-                jsonMapper.convertValue(json, klass)
+                jsonMapper.readValue<T>(json, klass)
             } catch (e: Exception) {
                 e.printStackTrace()
                 throw RuntimeException("Can't parse JSON: $value")
