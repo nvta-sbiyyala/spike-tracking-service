@@ -14,8 +14,7 @@ class ParcelRepo {
         } get ParcelTable.id
 
     fun update(parcelRecord: ParcelRecord) =
-        ParcelTable.update {
-            it[ParcelTable.id] = parcelRecord.id
+        ParcelTable.update({ ParcelTable.id eq parcelRecord.id }) {
             it[ParcelTable.contents] = parcelRecord.contents
         }
 }

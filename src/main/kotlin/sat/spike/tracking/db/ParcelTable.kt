@@ -5,8 +5,8 @@ import org.jetbrains.exposed.sql.Table
 
 object ParcelTable : Table("parcel") {
     val id = uuid("id")
-    override val primaryKey: PrimaryKey = PrimaryKey(id, name = "author_pkey")
+    override val primaryKey: PrimaryKey = PrimaryKey(id, name = "parcel_pkey")
     val contents = text("contents")
 }
 
-data class ParcelRecord(val id: UUID, val contents: String)
+data class ParcelRecord(val id: UUID, val contents: String, val tags: List<String>)

@@ -46,4 +46,4 @@ fun createOutboxEvent(record: ParcelRecord, mapper: ObjectMapper): OutboxEvent {
 }
 
 fun toParcelRecord(uuid: UUID, contents: String): ParcelRecord =
-    ParcelRecord(id = uuid, contents = contents)
+    ParcelRecord(id = uuid, contents = contents, tags = listOf("tag-1", "tag-2", "tag-3"))

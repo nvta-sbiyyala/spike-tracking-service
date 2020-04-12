@@ -1,6 +1,7 @@
 package sat.spike.tracking.utils.exposed.columnTypes
 // reference: https://gist.github.com/quangIO/a623b5caa53c703e252d858f7a806919
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.jetbrains.exposed.sql.BooleanColumnType
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Expression
@@ -13,7 +14,11 @@ import org.jetbrains.exposed.sql.VarCharColumnType
 import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
 import org.postgresql.util.PGobject
 
-fun <T : Any> Table.jsonb(name: String, klass: Class<T>, jsonMapper: ObjectMapper, nullable: Boolean): Column<T> {
+fun <T : Any> Table.jsonb(
+    name: String,
+    klass: Class<T>,
+    jsonMapper: ObjectMapper = jacksonObjectMapper(),
+    nullable: Boolean): Column<T> {
     return registerColumn<T>(name, JsonColumnType(klass, jsonMapper, nullable))
 }
 
