@@ -2,13 +2,13 @@ package sat.spike.tracking.services
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import java.util.UUID
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import sat.spike.tracking.controllers.ParcelRequest
 import sat.spike.tracking.db.ParcelRecord
 import sat.spike.tracking.db.ParcelRepo
 import sat.spike.tracking.events.OutboxEvent
-import java.util.UUID
 
 @Service
 class ParcelService(

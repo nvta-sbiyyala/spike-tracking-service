@@ -1,9 +1,9 @@
 package sat.spike.tracking.db
 
+import java.util.UUID
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.update
 import org.springframework.stereotype.Repository
-import java.util.UUID
 
 @Repository
 class ParcelRepo {

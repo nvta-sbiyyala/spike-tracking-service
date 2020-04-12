@@ -1,7 +1,7 @@
 package sat.spike.tracking.db
 
-import org.jetbrains.exposed.sql.Table
 import java.util.UUID
+import org.jetbrains.exposed.sql.Table
 
 object ParcelTable : Table("parcel") {
     val id = uuid("id")

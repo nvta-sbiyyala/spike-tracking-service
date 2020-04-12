@@ -6,6 +6,8 @@ plugins {
     kotlin("jvm") version "1.3.71"
     kotlin("plugin.spring") version "1.3.71"
     id("org.flywaydb.flyway") version "6.0.8"
+    // Linting
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
 }
 
 group = "sat.spike"
@@ -40,7 +42,6 @@ dependencies {
     }
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 
-
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -54,13 +55,11 @@ dependencies {
 
     // exposed
     implementation("org.jetbrains.exposed:exposed-core:0.22.1")
-    implementation("org.jetbrains.exposed:exposed-dao:0.22.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.22.1")
     implementation("org.jetbrains.exposed:exposed-jodatime:0.22.1")
     implementation("org.jetbrains.exposed:spring-transaction:0.22.1")
 
     implementation(kotlin("script-runtime"))
-
 }
 
 tasks.withType<Test> {

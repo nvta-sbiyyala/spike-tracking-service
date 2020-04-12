@@ -1,5 +1,6 @@
 package sat.spike.tracking
 
+import javax.sql.DataSource
 import org.jetbrains.exposed.spring.SpringTransactionManager
 import org.jetbrains.exposed.sql.Database
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -7,7 +8,6 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import sat.spike.tracking.db.DatabaseMigrator
-import javax.sql.DataSource
 
 @SpringBootApplication
 @EnableTransactionManagement

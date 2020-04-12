@@ -86,7 +86,10 @@ services:
       - elasticsearch
 
   spike-tracking-service:
-    image: docker.io/invtsbiyyala/spike-tracking-service:1.4
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: tracking-service
     ports:
       - '8080:8080'
     depends_on:
@@ -95,9 +98,12 @@ services:
       - debezium-connect
 
   auditing-service:
-    image: docker.io/invtsbiyyala/spike-auditing-service:1.2
+    build:
+      context: auditing-service
+      dockerfile: ./Dockerfile
     ports:
       - '5000:5000'
+    container_name: auditing-service
     environment:
       ES_HOST: elasticsearch:9200
     depends_on:

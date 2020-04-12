@@ -59,6 +59,8 @@ Tiny Flask app / `api`, to query `Elasticsearch`
 ```
 http://localhost:5000/parcels
 ```
+## Testing custom exposed "jsonb" field
+`select payload->'contents' AS contents from outbox;` 
 
 ## TODO
 Follow [![best practices](https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/)](https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/) for Elasticsearch `connector`, 

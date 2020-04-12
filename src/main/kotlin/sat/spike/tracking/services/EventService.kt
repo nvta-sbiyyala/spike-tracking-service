@@ -1,12 +1,12 @@
 package sat.spike.tracking.services
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import java.util.UUID
 import org.springframework.stereotype.Service
 import sat.spike.tracking.db.OutboxRecord
 import sat.spike.tracking.db.OutboxRepo
+import sat.spike.tracking.db.ParcelRecord
 import sat.spike.tracking.events.OutboxEvent
-import sat.spike.tracking.utils.toString
-import java.util.UUID
 
 @Service
 class EventService(
@@ -19,12 +19,13 @@ class EventService(
         val outboxRecord = OutboxRecord(
             uuid,
             outboxEvent.eventType,
-            outboxEvent.payload.toString(objectMapper))
+            objectMapper.convertValue(outboxEvent.payload, ParcelRecord::class.java))
 
         outboxRepo.save(outboxRecord = outboxRecord)
 
         // once record is written in outbox table, logs are generated and dbz (CDC eventing) picks it up
         // so Delete the event once written - so outbox doesn't grow
-        outboxRepo.delete(outboxRecord = outboxRecord)
+        // Commenting out delete, to test 'jsonb'
+        // outboxRepo.delete(outboxRecord = outboxRecord)
     }
 }
