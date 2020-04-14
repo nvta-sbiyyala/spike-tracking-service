@@ -27,7 +27,6 @@ class ParcelRepo {
             .limit(1)
             .first()
             .let { mapToResponse(it) }
-
     }
 
     private fun mapToResponse(row: ResultRow): ParcelRecordDto = ParcelRecordDto(

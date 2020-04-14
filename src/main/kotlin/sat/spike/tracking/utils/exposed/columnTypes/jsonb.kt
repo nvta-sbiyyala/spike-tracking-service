@@ -1,7 +1,5 @@
 package sat.spike.tracking.utils.exposed.columnTypes
-// reference: https://gist.github.com/quangIO/a623b5caa53c703e252d858f7a806919
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+// reference: https://github.com/JetBrains/Exposed/issues/127#issuecomment-612918775
 import org.jetbrains.exposed.sql.BooleanColumnType
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Expression
@@ -14,20 +12,17 @@ import org.jetbrains.exposed.sql.VarCharColumnType
 import org.jetbrains.exposed.sql.statements.api.PreparedStatementApi
 import org.postgresql.util.PGobject
 
-fun <T : Any> Table.jsonb(
-    name: String,
-    klass: Class<T>,
-    jsonMapper: ObjectMapper = jacksonObjectMapper(),
-    nullable: Boolean): Column<T> {
-    return registerColumn<T>(name, JsonColumnType(klass, jsonMapper, nullable))
+fun <T : Any> Table.jsonb(name: String, jsonParser: IJsonParser, nullable: Boolean): Column<T> {
+    return registerColumn<T>(name, ParsedJsonColumnType<T>(jsonParser, nullable))
 }
 
-class JsonColumnType<out T : Any>(
-    private val klass: Class<T>,
-    private val jsonMapper: ObjectMapper,
-    override var nullable: Boolean
-) : IColumnType {
+// Interface
+interface IJsonParser {
+    fun fromJson(json: String): Any?
+    fun toJson(source: Any): String
+}
 
+class ParsedJsonColumnType<out T : Any>(private val parser: IJsonParser, override var nullable: Boolean) : IColumnType {
     override fun setParameter(stmt: PreparedStatementApi, index: Int, value: Any?) {
         val obj = PGobject()
         obj.type = "jsonb"
@@ -41,18 +36,12 @@ class JsonColumnType<out T : Any>(
         is Map<*, *> -> value
         else -> {
             value as PGobject
-            try {
-                val json = value.value
-                jsonMapper.readValue<T>(json, klass)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                throw RuntimeException("Can't parse JSON: $value")
-            }
+            parser.fromJson(value.value) ?: throw RuntimeException("Cannot parse JSON: $value")
         }
     }
 
-    override fun notNullValueToDB(value: Any): Any = jsonMapper.writeValueAsString(value)
-    override fun nonNullValueToString(value: Any): String = "'${jsonMapper.writeValueAsString(value)}'"
+    override fun notNullValueToDB(value: Any): Any = parser.toJson(value)
+    override fun nonNullValueToString(value: Any): String = "'${parser.toJson(value)}'"
     override fun sqlType() = "jsonb"
 }
 
