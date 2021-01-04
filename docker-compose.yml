@@ -70,7 +70,7 @@ services:
   # Install debezium-connect.
   debezium-connect:
     container_name: custom-debezium-connect
-    image: docker.io/invtsbiyyala/dbz-custom-connect:1.0
+    image: docker.io/invtsbiyyala/dbz-custom-connect:1.1
     hostname: debezium-connect
     ports:
       - '8083:8083'
