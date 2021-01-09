@@ -65,3 +65,9 @@ http://localhost:5000/parcels
 ## TODO
 Follow [![best practices](https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/)](https://www.confluent.io/blog/kafka-elasticsearch-connector-tutorial/) for Elasticsearch `connector`, 
 to facilitate idiomatic/aggregated queries in auditing service
+
+## Work for spiking out operational query patterns
+1. Add a Snowflake sink connector
+2. Sink current CDC to snowflake
+3. Introduce another source DB which "sources" related, but distinct domain data 
+4. Modify the Snowflake "sinking" to aggregate the two source streams 
