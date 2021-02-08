@@ -1,0 +1,17 @@
+{
+  "name":"kafkasnowflakeingestkafkapoc",
+  "config":{
+    "connector.class":"com.snowflake.kafka.connector.SnowflakeSinkConnector",
+    "topics":"pockafkaCATALOG_SALES,pockafkaCUSTOMER,pockafkaCUSTOMER_DEMOGRAPHICS",
+    "snowflake.topic2table.map": "pockafkaCATALOG_SALES:kafkasales,pockafkaCUSTOMER:kafkacustomer,pockafkaCUSTOMER_DEMOGRAPHICS:kafkademographics",
+    "snowflake.url.name":"koen.eu-central-1.snowflakecomputing.com",
+    "snowflake.user.name":"koen@koen.io",
+    "snowflake.private.key":"xx",
+    "snowflake.private.key.passphrase":"koen",
+    "snowflake.database.name":"sandbox",
+    "snowflake.schema.name":"kafka_target",
+    "key.converter":"org.apache.kafka.connect.storage.StringConverter",
+    "value.converter":"com.snowflake.kafka.connector.records.SnowflakeJsonConverter",
+    "value.converter.schema.registry.url":"http://schema-registry:8081"
+  }
+}
