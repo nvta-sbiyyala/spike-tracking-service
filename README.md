@@ -71,3 +71,7 @@ to facilitate idiomatic/aggregated queries in auditing service
 2. Sink current CDC to snowflake
 3. Introduce another source DB which "sources" related, but distinct domain data 
 4. Modify the Snowflake "sinking" to aggregate the two source streams 
+
+## Snowflake
+Snowflake is the second "sink" source
+instance: https://ica10446.us-east-1.snowflakecomputing.com/console
